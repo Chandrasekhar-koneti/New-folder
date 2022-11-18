@@ -1,0 +1,100 @@
+<html>
+<head>
+
+    <!-- <meta charset="UTF-8" />
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <link rel="stylesheet" href="style.css" /> -->
+    
+    <title>Document </title>
+    
+    </head>
+
+    <body>
+
+    <header>
+
+    <h1>Registration Form</h1>
+    </header>
+
+    <section class="container">
+
+    <form id="my-form">
+
+    <h1>Add User</h1>
+    <div class="msg"></div>
+
+    <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" />
+    </div>
+
+    <div>
+    <label for="email">Email:</label>
+    <input type="text" id="email" />
+    </div>
+
+    <input class="btn" id="submit" type="submit" value="Submit" />
+    </form>
+
+    
+    </section>
+
+
+
+
+    <script>
+        var username = document.getElementById('name').value.trim(); 
+var usermail = document.getElementById('email').value.trim(); 
+
+
+
+var DetailsObj = {
+
+name: username,
+
+email: usermail
+
+};
+
+document.getElementById('my-form').addEventListener('submit', function(e) { 
+ e.preventDefault();
+
+var username = document.getElementById('name').value.trim();
+var usermail = document.getElementById('email').value.trim();
+
+var Details0bj = {
+
+name: username,
+
+email: usermail
+};
+
+localStorage.setItem('DetailsObj', JSON.stringify(DetailsObj));
+
+var fetchObj = JSON.parse(localStorage.getItem( 'DetailsObj', JSON.stringify(DetailsObj))
+);
+
+console.log(fetchObj);
+});
+
+
+var fetchObj = JSON.parse(localStorage.getItem('DetailsObj', JSON.stringify(DetailsObj))
+);
+console.log(fetchObj);
+
+
+    </script>
+
+    </body>
+    </html>
+
+
+
+
+
+
+
