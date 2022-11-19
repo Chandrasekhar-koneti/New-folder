@@ -20,7 +20,13 @@
             const phone=event.target.phone.value;
             localStorage.setItem('name',name);
             localStorage.setItem('email',email);
-            localStorage.setitem('phone',phone)
+            localStorage.setitem('phone',phone);
+            const obj={
+                name,
+                email,
+                phone
+            }
+            localStorage.setItem('userdetails',JSON.obj)
         }
     </script>
     </body>

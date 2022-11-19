@@ -1,85 +1,122 @@
-var form = document.getElementById('addForm');
-var itemList = document.getElementById('items');
-// Form submit event
-form.addEventListener('submit', addItem);
-// Delete event
-itemList.addEventListener('click', removeItem);
+// var form = document.getElementById('addForm');
+// var itemList = document.getElementById('items');
+// // Form submit event
+// form.addEventListener('submit', addItem);
+// // Delete event
+// itemList.addEventListener('click', removeItem);
 
 
 
-// Add item
-function addItem(e){
-    e.preventDefault();
+// // Add item
+// function addItem(e){
+//     e.preventDefault();
 
-    // Get input value
-    var newItem = document.getElementById('item').value;
-    var description=document.getElementById('description').value;
-
-
-    // Create new li element
-    var li = document.createElement('li');
-    // Add class
-    li.className = 'list-group-item';
-    // Add text node with input value
-    li.appendChild(document.createTextNode(newItem));
+//     // Get input value
+//     var newItem = document.getElementById('item').value;
+//     var description=document.getElementById('description').value;
 
 
-    // Create del button element
-    var deleteBtn = document.createElement('button');
-    var descriptionNode=document.createTextNode(" "+description)
+//     // Create new li element
+//     var li = document.createElement('li');
+//     // Add class
+//     li.className = 'list-group-item';
+//     // Add text node with input value
+//     li.appendChild(document.createTextNode(newItem));
 
 
-    // Add classes to del button
-    deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
-
-    // Append text node
-    deleteBtn.appendChild(document.createTextNode('X'));
-
-    //create edit button
-    var editBtn = document.createElement('button');
-
-    //Add  classes to edit button
-    editBtn.className = 'btn btn-success btn-sm float-right'
-    //append text node
-    editBtn.appendChild(document.createTextNode('EDIT'));
-
-    // Append button to li
-    li.appendChild(deleteBtn);
-    li.appendChild(descriptionNode);
+//     // Create del button element
+//     var deleteBtn = document.createElement('button');
+//     var descriptionNode=document.createTextNode(" "+description)
 
 
-  //append editbtn to list
-  li.appendChild(editBtn);
-    // Append li to list
-    itemList.appendChild(li);
-  }
+//     // Add classes to del button
+//     deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
 
-  // Remove item
-  function removeItem(e){
-    if(e.target.classList.contains('delete')){
-      if(confirm('Are You Sure?')){
-        var li = e.target.parentElement;
-        itemList.removeChild(li);
-      }
-    }
-  }
-   // Filter Items
-   function onFilter(e)
-   {
-     const text=e.target.value.toLowerCase();
-     const items=itemList.getElementById('li');
-     Array.from(items).forEach(function(item)
-     {
-       const itemName=item.firstChild.textContent;
-       const description=item.childNodes[1].textContent;
-       if((itemName.toLowerCase().indexof(text) !=-1) || (description.toLowerCase().indexof(text)!=-1))
-       {
-         item.style.display='block';
-       }else
-       {
-         item.style.display = 'none';
-       }
-     })
-   }
+//     // Append text node
+//     deleteBtn.appendChild(document.createTextNode('X'));
+
+//     //create edit button
+//     var editBtn = document.createElement('button');
+
+//     //Add  classes to edit button
+//     editBtn.className = 'btn btn-success btn-sm float-right'
+//     //append text node
+//     editBtn.appendChild(document.createTextNode('EDIT'));
+
+//     // Append button to li
+//     li.appendChild(deleteBtn);
+//     li.appendChild(descriptionNode);
+
+
+//   //append editbtn to list
+//   li.appendChild(editBtn);
+//     // Append li to list
+//     itemList.appendChild(li);
+//   }
+
+//   // Remove item
+//   function removeItem(e){
+//     if(e.target.classList.contains('delete')){
+//       if(confirm('Are You Sure?')){
+//         var li = e.target.parentElement;
+//         itemList.removeChild(li);
+//       }
+//     }
+//   }
+//    // Filter Items
+//    function onFilter(e)
+//    {
+//      const text=e.target.value.toLowerCase();
+//      const items=itemList.getElementById('li');
+//      Array.from(items).forEach(function(item)
+//      {
+//        const itemName=item.firstChild.textContent;
+//        const description=item.childNodes[1].textContent;
+//        if((itemName.toLowerCase().indexof(text) !=-1) || (description.toLowerCase().indexof(text)!=-1))
+//        {
+//          item.style.display='block';
+//        }else
+//        {
+//          item.style.display = 'none';
+//        }
+//      })
+//    }
     
  
+
+   
+   var username = document.getElementById("name").value.trim(); 
+   var usermail = document.getElementById("email").value.trim(); 
+
+   var DetailsObj = {
+   
+   name: username,
+   
+   email: usermail
+   
+   };
+   
+   document.getElementById('my-form').addEventListener('submit', function(e) { e.preventDefault();
+   
+   var username = document.getElementById("name").value.trim();
+   var usermail = document.getElementById('email').value.trim();
+   
+   var Details0bj = {
+   
+   name: username,
+   
+   email: usermail
+   };
+   
+   localStorage.setItem("DetailsObj", JSON.stringify(DetailsObj));
+   
+   var fetchObj = JSON.parse(localStorage.getItem( "DetailsObj", JSON.stringify(DetailsObj))
+   );
+   
+   console.log(fetchObj);
+  });
+
+   
+   var fetchObj = JSON.parse(localStorage.getItem("DetailsObj", JSON.stringify(DetailsObj))
+   );
+   console.log(fetchObj);
