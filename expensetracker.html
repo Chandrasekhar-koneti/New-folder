@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker App</title>
+  </head>
+  <body>
+    <header>
+        <h1><font color="red">Enter Details</font></h1>
+        </header>
+    <form onsubmit="saveToLocalStorage(event)">
+      <label><font color="green">Choose Expense Amount : </font></label>
+      <input
+        type="text"
+        id="amount"
+        name="amount"
+        size="15"
+        placeholder="Enter Amount"
+        required
+      />
+      <label><font color="green"> Choose Description : </font></label>
+      <input
+        type="text"
+        id="description"
+        name="description"
+        size="15"
+        required
+      />
+      <label><font color="green"> Choose a category : </font></label>
+      <select
+        name="category"
+        id="category"
+        size="1"
+        placeholder="Enter Category"
+        required
+      >
+        <option>Movie</option>
+        <option>Food</option>
+        <option>Electricity</option>
+        <option>Travel</option>
+        <option>Fuel</option>
+      </select>
+      <button><font color="orange">Add Expense</font></button>
+    </form>
+    <ul id="listOfExpenses"></ul>
+
+    <script >
+        function saveToLocalStorage(event) {
+    event.preventDefault();
+    const amount = event.target.amount.value;
+    const description = event.target.description.value;
+    const category = event.target.category.value;
+    // localStorage.setItem("amount", amount);
+    // localStorage.setItem("description", description);
+    // localStorage.setItem("category", category);
+  
+    const obj = {
+      amount,
+      description,
+      category,
+    };
+  
+    localStorage.setItem(obj.category, JSON.stringify(obj));
+    showNewUserOnScreen(obj);
+  }
+  
+  window.addEventListener("DOMContentLoaded", () => {
+    const localStorageObj = localStorage;
+    const localstoragekeys = Object.keys(localStorageObj);
+  
+    for (var i = 0; i < localstoragekeys.length; i++) {
+      const key = localstoragekeys[i];
+      const userDetailsString = localStorageObj[key];
+      const userDetailsObj = JSON.parse(userDetailsString);
+      showNewUserOnScreen(userDetailsObj);
+    }
+  });
+  
+  function showNewUserOnScreen(user) {
+    if (localStorage.getItem(user.category) !== null) {
+      removeUserFromScreen(user.category);
+    }
+  
+    const parentNode = document.getElementById("listOfExpenses");
+    const childHTML = `<li id=${user.category}> ${user.amount} - ${user.description} - ${user.category}
+                       <button onclick=deleteUser('${user.category}')> Delete </button>
+                       <button onclick=editUserDetails('${user.category}','${user.amount}','${user.description}')> Edit </button>
+                       </li>`;
+    parentNode.innerHTML = parentNode.innerHTML + childHTML;
+  }
+  
+  function removeUserFromScreen(category) {
+    const parentNode = document.getElementById("listOfExpenses");
+    const childNodeToBeDeleted = document.getElementById(category);
+  
+    if (childNodeToBeDeleted) {
+      parentNode.removeChild(childNodeToBeDeleted);
+    }
+  }
+  
+  function deleteUser(category) {
+    console.log(category);
+    localStorage.removeItem(category);
+    removeUserFromScreen(category);
+  }
+  
+  function editUserDetails(category, amount, description) {
+    console.log(category);
+    document.getElementById("category").value = category;
+    document.getElementById("amount").value = amount;
+    document.getElementById("description").value = description;
+    deleteUser(category);
+  }
+  
+    </script>
+  </body>
+</html>
